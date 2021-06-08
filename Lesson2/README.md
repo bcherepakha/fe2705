@@ -23,6 +23,7 @@
 ## Дополнительно
 
 * [Тренажер по Emmet](https://epixx.github.io/emmet/)
+* [CSSReference](https://cssreference.io/)
 * [Git](git.md)
 * [Семантика](semantic.md)
 * [Работа с файловой системой](fileSystem.md)
