@@ -7,10 +7,20 @@ body {
 .header {
     display: block;
     width: 100%;
+    min-height: 430px;
+    max-height: 700px;
+    height: 46.875vw;
+
+    /** 1vw = 1/100 viewport width, 1vh = 1/100 viewport height */
+    /** 1vw > 1vh => 1vmin === 1vh; 1vmax === 1vw */
+    /** 1vw < 1vh => 1vmin === 1vw; 1vmax === 1vh */
 
     box-sizing: border-box;
 
     padding: 30px 30px 150px;
+
+    display: flex;
+    flex-direction: column;
 
     /* top right bottom left */
     /* top right/left bottom */
@@ -23,6 +33,7 @@ body {
     /* padding-left: 30px; */
 
     background: url('img/bgc.jpg') center center no-repeat;
+    background-size: cover;
 }
 
 .header__wrapper {
@@ -48,3 +59,95 @@ body {
     color: #f7e06f;
     outline: none;
 }
+
+.header__nav-container {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    /* margin-bottom: 583px; */
+
+    position: sticky;
+    top: 30px;
+}
+
+.header__nav-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+
+    display: flex;
+    align-items: stretch;
+}
+
+/* 0, 1, 1 */
+.header__nav-container li {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+
+    border-left: 1px solid #FFFFFF;
+
+    display: flex;
+}
+
+/* 0, 2, 1 */
+.header__nav-container li:first-child {
+    border-left: 0;
+}
+
+.header__nav-container a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 100%;
+
+    padding: 11px 0 15px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+    color: inherit;
+
+    transition: background .6s ease-in-out 0s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__nav-container a:hover {
+    background: #99862A;
+}
+
+.header__actions {
+    /* margin-top: 583px; */
+    margin-top: auto;
+
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    position: sticky;
+    bottom: 30px;
+}
+
+.header__actions a {
+    background: #99862A;
+    color: inherit;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    display: block;
+
+    padding: 15px 30px;
+    /* margin: 0 15px; */
+}
+
+/* .header__actions a:not(:first-child) {
+    margin-left: 30px;
+} */
