@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="main"></main>
+    <aside class="aside">
+        <div class="calendar aside__item">
+            <div class="calendar__header">
+                <!-- WAI ARIA -->
+                <button class="calendar__change-month calendar__change-month--prev" aria-label="Previous month">
+                    <svg role="image" aria-label="" class="calendar__change-month-img" viewBox="0 0 20 38">
+                        <path d="M19 1L1 19L19 37" />
+                    </svg>
+                </button>
+                <h2 class="calendar__title">March 2018</h2>
+                <button class="calendar__change-month calendar__change-month--next" aria-label="Next month">
+                    <svg role="image" aria-label="" class="calendar__change-month-img" viewBox="0 0 20 38">
+                        <path d="M19 1L1 19L19 37" />
+                    </svg>
+                </button>
+            </div>
+            <ul class="calendar__days-title">
+                <li class="calendar__day-title">M</li>
+                <li class="calendar__day-title">T</li>
+                <li class="calendar__day-title">W</li>
+                <li class="calendar__day-title">T</li>
+                <li class="calendar__day-title">F</li>
+                <li class="calendar__day-title">Sat</li>
+                <li class="calendar__day-title">Sun</li>
+            </ul>
+            <ul class="calendar__days">
+                <li class="calendar__day calendar__day--not-in-month">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">29</a>
+                </li>
+                <li class="calendar__day calendar__day--not-in-month">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">30</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">1</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">2</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">3</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">4</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">5</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">6</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">7</a>
+                </li>
+
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">8</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">9</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">10</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">11</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">12</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">13</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">14</a>
+                </li>
+
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">15</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">16</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">17</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">18</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">19</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">20</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">21</a>
+                </li>
+
+                <li class="calendar__day calendar__day--active">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">22</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">23</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">24</a>
+                </li>
+                <li class="calendar__day calendar__day--current">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">25</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">26</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">27</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">28</a>
+                </li>
+
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">29</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">30</a>
+                </li>
+                <li class="calendar__day">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">31</a>
+                </li>
+                <li class="calendar__day calendar__day--not-in-month">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">1</a>
+                </li>
+                <li class="calendar__day calendar__day--not-in-month">
+                    <a href="?day=2018-03-01" aria-label="Monday, 1 March 2018">2</a>
+                </li>
+            </ul>
+        </div>
+        <div class="categories aside__item"></div>
+    </aside>
+
+</body>
+</html>
