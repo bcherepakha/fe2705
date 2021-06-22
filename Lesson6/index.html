@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="tasks.js"></script>
+</head>
+<body>
+
+    <script>
+        const x = prompt('Введите первое число');
+        const y = prompt('Введите второе число', '10');
+
+        if (x === null
+            || isNaN( parseInt(x) )
+            ||  typeof y === 'object'
+            || isNaN( parseInt(y) )) {
+            //* нажали на cancel или ввели не число
+            alert('Дальшение операции не возможны');
+        } else {
+            const m = getMod(parseFloat(x), parseFloat(y));
+
+            // alert( 'Остаток от деления ' + parseFloat(x) + ' на ' + parseFloat(y) + ' равно ' + m );
+            alert( `Остаток от деления ${parseFloat(x)} на ${parseFloat(y)} равно ${m}` );
+        }
+
+    </script>
+</body>
+</html>
