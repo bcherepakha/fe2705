@@ -3,6 +3,15 @@
 // Сколько человек зашло в кабинет, если известно, что всего произошло 120 рукопожатий.
 
 function getPeople(handshake) {
+    let currentHandshake = 0;
+    let people = 0;
+
+    while (currentHandshake < handshake) {
+        currentHandshake += people + 1;
+        people++;
+    }
+
+    return people;
 }
 
 console.log( getPeople(1) ); // 1

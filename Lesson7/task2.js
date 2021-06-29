@@ -7,6 +7,27 @@
 // где mine - это высота шахты, speed - скорость таракана за час, slowdown - расстояние падения из-за усталости
 
 function getTimeForInterceptCockroaches(mine = 5, speed = 1, slowdown = .5) {
+    let position = 0;
+    let time = 0;
+
+    //* mine = .9
+    //* speed = 1
+    //* slowdown = .5
+    //* position = 1
+    //* time = .9
+    for (; position < mine; ) {
+        position += speed;
+        time++;
+
+        if (position < mine) {
+            position -= slowdown;
+        } else {
+            time -= (position - mine) / speed;
+        }
+    }
+
+    // position === mine
+    return time;
 }
 
 console.log( getTimeForInterceptCockroaches(.9, 1, .5) ); // .9

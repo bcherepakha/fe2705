@@ -12,3 +12,42 @@
     9.  Измените в копии свойство name на Ivan.
     10. Сравните свойства этих двух обьектов и придумайте структуру данных для отображения их разницы.
 */
+
+const user = {
+    'group-name': 'fe2402',
+    name: 'Alexander',
+    1: 1,
+    10: 10,
+    '-10': -10
+};
+const propertyName = 'name';
+
+console.log( user.name );
+console.log( user['group-name'] );
+console.log( user[propertyName] );
+console.log( user.propertyName );
+console.log( user[1] );
+
+user.name = 'Igor';
+user[1] = 100;
+
+console.log( user.name );
+console.log( user[1] );
+
+delete user[1];
+
+console.log( user[1] );
+
+const user2 = {
+    ...user,
+    name: 'Ivan'
+};
+
+// for (const key in user) {
+//     user2[key] = user[key];
+// }
+
+// user2.name = 'Ivan';
+
+console.log(user2);
+console.log(user);
