@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крестики нолики</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="title">Крестики нолики</h1>
+
+    <form class="game-data">
+        <button type="submit">Играть</button>
+        <select name="sign">
+            <option value="x">Крестиками</option>
+            <option value="o">Ноликами</option>
+        </select>
+        c
+        <select name="type">
+            <option value="human">человеком</option>
+            <option value="robot">компьютером</option>
+        </select>
+    </form>
+
+    <div class="game">
+        <div class="game__user">
+            <h2>Крестики</h2>
+            <div>Человек</div>
+            <div>8 побед</div>
+        </div>
+
+        <div class="board" data-win="1" data-win-type="diagonal" data-win-idx="1">
+            <div class="board__item">
+                <svg class="board__sign board__sign--x" viewBox="0 0 20 20">
+                    <line class="board__line" x1="4" y1="2" x2="16" y2="18"/>
+                    <line class="board__line" x1="16" y1="2" x2="4" y2="18"/>
+                </svg>
+            </div>
+            <div class="board__item">
+                <svg class="board__sign board__sign--o" viewBox="0 0 20 20">
+                    <ellipse class="board__ellipse" cx="10" cy="10" rx="7" ry="8" />
+                </svg>
+            </div>
+            <div class="board__item"></div>
+            <div class="board__item"></div>
+            <div class="board__item"></div>
+            <div class="board__item"></div>
+            <div class="board__item"></div>
+            <div class="board__item"></div>
+            <div class="board__item"></div>
+        </div>
+
+        <div class="game__user">
+            <h2>Нолики</h2>
+            <div>Компьютер</div>
+            <div>8 побед</div>
+        </div>
+    </div>
+
+    <div class="modal" hidden>
+        <div class="modal__content">
+            <h2 class="modal__content-title">Представьтесь, пожалуйста</h2>
+            <form class="greeting">
+                <input
+                    required
+                    minlength="5"
+                    name="name"
+                    placeholder="Ваше имя"
+                    type="text">
+                <button type="submit">Играть</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
