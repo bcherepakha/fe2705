@@ -257,6 +257,40 @@
 .game {
     display: flex;
     justify-content: space-around;
+
+    position: relative;
+}
+
+.notification {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid black;
+    border-radius: 10px;
+    background: blanchedalmond;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    transform: translate(-50%, -50%);
+}
+
+.notification[hidden] {
+    display: none;
+}
+
+.notification__title {
+    margin: 0 0 16px;
+    text-align: center;
+}
+
+.notification__actions {
+    display: flex;
+    justify-content: center;
 }
 
 .game__user {

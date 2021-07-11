@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Крестики нолики</title>
     <link rel="stylesheet" href="style.css">
-    <script src="greeting.js" defer></script>
+    <script src="greeting.js" ></script>
     <script src="game.js" defer></script>
+    <script src="notifications.js" defer></script>
+    <script src="gamer.js" defer></script>
     <script src="app.js" defer></script>
     <!-- Это коментарий -->
 </head>
@@ -28,13 +30,13 @@
     </form>
 
     <div class="game">
-        <div class="game__user">
+        <div class="game__user game__user--x">
             <h2>Крестики</h2>
-            <div>Человек</div>
-            <div>8 побед</div>
+            <div class="game__user-type">Человек</div>
+            <div class="game__user-win">8 побед</div>
         </div>
 
-        <div class="board board--1" data-win="1" data-win-type="diagonal" data-win-idx="1">
+        <div class="board" data-win="1" data-win-type="diagonal" data-win-idx="1">
             <div class="board__item">
                 <svg class="board__sign board__sign--x" viewBox="0 0 20 20">
                     <line class="board__line" x1="4" y1="2" x2="16" y2="18"/>
@@ -55,14 +57,21 @@
             <div class="board__item"></div>
         </div>
 
-        <div class="game__user">
+        <div class="game__user game__user--o">
             <h2>Нолики</h2>
-            <div>Компьютер</div>
-            <div>8 побед</div>
+            <div class="game__user-type">Человек</div>
+            <div class="game__user-win">8 побед</div>
+        </div>
+
+        <div class="notification" hidden>
+            <h2 class="notification__title">Выиграли Крестики</h2>
+            <div class="notification__actions">
+                <button class="notification__action">Играть заново</button>
+            </div>
         </div>
     </div>
 
-    <div class="modal" hidden>
+    <div class="modal">
         <div class="modal__content">
             <h2 class="modal__content-title">Представьтесь, пожалуйста</h2>
             <form class="greeting">
@@ -76,28 +85,5 @@
             </form>
         </div>
     </div>
-
-
-    <div class="board board--2" data-win="1" data-win-type="diagonal" data-win-idx="1">
-        <div class="board__item">
-            <svg class="board__sign board__sign--x" viewBox="0 0 20 20">
-                <line class="board__line" x1="4" y1="2" x2="16" y2="18"/>
-                <line class="board__line" x1="16" y1="2" x2="4" y2="18"/>
-            </svg>
-        </div>
-        <div class="board__item">
-            <svg class="board__sign board__sign--o" viewBox="0 0 20 20">
-                <ellipse class="board__ellipse" cx="10" cy="10" rx="7" ry="8" />
-            </svg>
-        </div>
-        <div class="board__item"></div>
-        <div class="board__item"></div>
-        <div class="board__item"></div>
-        <div class="board__item"></div>
-        <div class="board__item"></div>
-        <div class="board__item"></div>
-        <div class="board__item"></div>
-    </div>
-
 </body>
 </html>

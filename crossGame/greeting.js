@@ -1,20 +1,29 @@
-let userName;
-const modal = {
-    el: document.querySelector('.modal'),
-    formEl: document.querySelector('.greeting'),
-    inputEl: document.querySelector('.greeting input')
-};
+// eslint-disable-next-line no-unused-vars
+function createGreeting( onHello ) {
+    const modal = {
+        el: document.querySelector('.modal'),
+        formEl: document.querySelector('.greeting'),
+        inputEl: document.querySelector('.greeting input')
+    };
 
-modal.formEl.addEventListener('submit', onGreet);
+    modal.formEl.addEventListener('submit', onGreet);
 
-function onGreet(e) {
-    e.preventDefault();
+    function onGreet(e) {
+        e.preventDefault();
 
-    userName = modal.inputEl.value;
+        const userName = modal.inputEl.value;
 
-    console.log('Greet', userName);
+        if (userName && userName.length > 3) {
+            modal.el.hidden = true;
+            modal.userName = userName;
 
-    if (userName && userName.length > 3) {
-        modal.el.hidden = true;
+            if (onHello) {
+                onHello(userName);
+            }
+        }
+
+        console.log('Greet', userName);
     }
+
+    return modal;
 }

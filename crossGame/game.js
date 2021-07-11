@@ -2,16 +2,25 @@ const X = 'x';
 const O = 'o';
 const EMPTY = '';
 
-function createGame(selector) {
+// eslint-disable-next-line no-unused-vars
+function createGame(selector, onEndGame) {
     const game = {
         boardEl: document.querySelector(selector),
-        board: [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+        board: new Array(9).fill(EMPTY),
         currentUser: X,
         status: 'STARTED',
         start: function () {
             this.clearBoard();
             this.currentUser = X;
             this.status = 'STARTED';
+            this.board =  new Array(9).fill(EMPTY);
+        },
+        pause(active) {
+            if (!['PAUSED', 'STARTED'].includes(this.status)) {
+                return ;
+            }
+
+            this.status = active ? 'PAUSED' : 'STARTED';
         },
         addEventListeners: function () {
             //* this = game
@@ -102,13 +111,24 @@ function createGame(selector) {
             this.board[cellIdx] = this.currentUser;
 
             const winLine = this.getUserWinLine();
+            const standoff = !this.board.includes(EMPTY);
 
             if (winLine) {
-                this.status = 'ENDED';
+                this.status = 'WIN';
 
                 this.boardEl.dataset.win = 1;
                 this.boardEl.dataset.winType = winLine.type;
                 this.boardEl.dataset.winIdx = winLine.index;
+
+                if (onEndGame) {
+                    onEndGame();
+                }
+            } else if (standoff) {
+                this.status = 'STANDOFF';
+
+                if (onEndGame) {
+                    onEndGame();
+                }
             } else {
                 this.currentUser = this.currentUser === X ? O : X;
             }
@@ -175,16 +195,7 @@ function createGame(selector) {
     };
 
     game.cellsCol = Array.from(game.boardEl.querySelectorAll('.board__item'));
+    game.addEventListeners();
 
     return game;
 }
-
-const game1 = createGame('.board--1');
-
-game1.addEventListeners();
-game1.start();
-
-const game2 = createGame('.board--2');
-
-game2.addEventListeners();
-game2.start();
