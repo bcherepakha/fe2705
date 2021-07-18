@@ -138,3 +138,26 @@
 
     z-index: 3;
 }
+
+.circle .slider__body {
+    position: relative;
+    padding-top: 30%;
+
+    --z-radius: -400px;
+
+    transform-origin: 50% 50% var(--z-radius);
+    transform-style: preserve-3d;
+
+    transition: transform .8s linear 0s;
+}
+
+.circle .slider__slide {
+    position: absolute;
+    top: 25%;
+    left: 35%;
+
+    width: 30%;
+    height: 50%;
+
+    transform-origin: 50% 50% var(--z-radius);
+}

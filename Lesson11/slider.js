@@ -28,6 +28,7 @@ function Slider( selector, loop = false, type = 'fade', autoMove = 2000 ) {
 
     // this.render = type === 'slide' ? this.renderSlide : this.renderFade;
 
+    this.init();
     this.render();
 
     //* return this;
@@ -64,7 +65,7 @@ Slider.prototype.prev = function () {
     this.show(prevSlide);
 };
 
-Slider.prototype.show = function (idx) {
+Slider.prototype.getSlideNumber = function (idx) {
     let currentSlide = Math.min(Math.max(idx, 0), this.slides.length - 1);
 
     if (this.loop) {
@@ -75,7 +76,15 @@ Slider.prototype.show = function (idx) {
         }
     }
 
-    this.currentSlide = currentSlide;
+    return currentSlide;
+};
+
+Slider.prototype.show = function (idx) {
+    if (this.type !== 'circle') {
+        this.currentSlide = this.getSlideNumber(idx);
+    } else {
+        this.currentSlide = idx;
+    }
 
     this.render();
 };
@@ -98,10 +107,32 @@ Slider.prototype.renderSlide = function () {
     this.bodyEl.style.transform = `translateX(-${100*currentSlide}%)`;
 };
 
+Slider.prototype.renderCircle = function () {
+    const {currentSlide} = this;
+
+    this.bodyEl.style.transform = `rotateY(${currentSlide*360/this.slides.length}deg)`;
+};
+
+Slider.prototype.init = function () {
+    switch (this.type) {
+    case 'circle':
+
+        this.slides.forEach((slide, idx) => {
+            slide.style.transform = `rotateY(${idx*360/this.slides.length}deg)`;
+        });
+
+        return ;
+    default:
+        return ;
+    }
+};
+
 Slider.prototype.render = function () {
     switch (this.type) {
     case 'fade':
         return this.renderFade();
+    case 'circle':
+        return this.renderCircle();
     default:
         return this.renderSlide();
     }
