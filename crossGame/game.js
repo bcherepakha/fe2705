@@ -114,17 +114,21 @@ const gamePrototype = {
             this.boardEl.dataset.winType = winLine.type;
             this.boardEl.dataset.winIdx = winLine.index;
 
-            if (onEndGame) {
-                onEndGame();
+            if (this.onEndGame) {
+                this.onEndGame();
             }
         } else if (standoff) {
             this.status = 'STANDOFF';
 
-            if (onEndGame) {
-                onEndGame();
+            if (this.onEndGame) {
+                this.onEndGame();
             }
         } else {
             this.currentUser = this.currentUser === X ? O : X;
+
+            if (this.onStep) {
+                this.onStep();
+            }
         }
 
         this.render();
@@ -189,7 +193,7 @@ const gamePrototype = {
 };
 
 // eslint-disable-next-line no-unused-vars
-function createGame(selector, onEndGame) {
+function createGame(selector, onEndGame, onStep) {
     const game = {
         boardEl: document.querySelector(selector),
         board: new Array(9).fill(EMPTY),
@@ -200,6 +204,8 @@ function createGame(selector, onEndGame) {
 
     game.cellsCol = Array.from(game.boardEl.querySelectorAll('.board__item'));
     game.addEventListeners();
+    game.onEndGame = onEndGame;
+    game.onStep = onStep;
 
     return game;
 }

@@ -1,0 +1,16 @@
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .6em;
+
+    margin: .6em 0;
+}
+
+.timer[data-status='STARTED'] .timer__value {
+    color: green;
+}
+
+.timer[data-status='PAUSED'] .timer__value {
+    color: lightgreen;
+}

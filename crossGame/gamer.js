@@ -1,3 +1,4 @@
+/* global Timer */
 // eslint-disable-next-line no-unused-vars
 function createGamer(selector) {
     const gamer = {
@@ -13,6 +14,9 @@ function createGamer(selector) {
     gamer.rootEl = document.querySelector(selector);
     gamer.typeEl = gamer.rootEl.querySelector('.game__user-type');
     gamer.winEl = gamer.rootEl.querySelector('.game__user-win');
+    gamer.timerEl = gamer.rootEl.querySelector('.game__timer');
+
+    gamer.timer = new Timer(gamer.timerEl);
 
     gamer.setData = function (type, name) {
         gamer.data = {

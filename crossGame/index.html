@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Крестики нолики</title>
+    <link rel="stylesheet" href="../Lesson12/timer.css">
     <link rel="stylesheet" href="style.css">
-    <script src="greeting.js" ></script>
+    <script src="../Lesson12/timer.js" defer></script>
+    <script src="greeting.js" defer></script>
     <script src="game.js" defer></script>
     <script src="notifications.js" defer></script>
     <script src="gamer.js" defer></script>
@@ -32,6 +34,7 @@
     <div class="game">
         <div class="game__user game__user--x">
             <h2>Крестики</h2>
+            <div class="game__timer"></div>
             <div class="game__user-type">Человек</div>
             <div class="game__user-win">8 побед</div>
         </div>
@@ -59,6 +62,7 @@
 
         <div class="game__user game__user--o">
             <h2>Нолики</h2>
+            <div class="game__timer"></div>
             <div class="game__user-type">Человек</div>
             <div class="game__user-win">8 побед</div>
         </div>

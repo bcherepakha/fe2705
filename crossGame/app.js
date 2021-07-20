@@ -1,19 +1,24 @@
 /* global createGame, createNotification, createGreeting, createGamer */
-const greeting = createGreeting( onHello );
-const game = createGame('.board', endGameHandler);
+createGreeting( onHello ); //? this = undefined | Window
+const game = createGame('.board', endGameHandler, stepHandler);
 const notification = createNotification( startNewGame );
 const gamerX = createGamer('.game__user--x');
 const gamerO = createGamer('.game__user--o');
 
-startNewGame();
-
-console.log({ gamerX, gamerO });
+// startNewGame();
+game.clearBoard();
 
 function startNewGame() {
     game.start();
+    gamerX.timer.reset();
+    gamerO.timer.reset();
+    // gamerX.timer.start();
 }
 
 function endGameHandler() {
+    gamerO.timer.pause();
+    gamerX.timer.pause();
+
     if (game.status === 'STANDOFF') {
         notification.setText('Ничья');
     } else if (game.currentUser === 'x') {
@@ -26,7 +31,20 @@ function endGameHandler() {
 }
 
 function onHello(userName) {
-    console.log( 'onHello', userName, greeting );
-    gamerX.setData('human', userName);
-    gamerO.setData('human', userName);
+    gamerX.setData('human', userName); //? this = gamerX
+    gamerO.setData('human', userName); //? this = gamerO
+    startNewGame();
+}
+
+function stepHandler() {
+    switch (game.currentUser) {
+    case 'x':
+        gamerX.timer.start();
+        gamerO.timer.pause();
+        break;
+    default:
+        gamerO.timer.start();
+        gamerX.timer.pause();
+        break;
+    }
 }
