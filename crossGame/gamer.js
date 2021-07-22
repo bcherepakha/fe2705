@@ -18,7 +18,7 @@ function createGamer(selector) {
 
     gamer.timer = new Timer(gamer.timerEl);
 
-    gamer.setData = function (type, name) {
+    gamer.setData = function (type = this.data.type, name = this.data.name) {
         gamer.data = {
             type,
             name
@@ -41,7 +41,7 @@ function createGamer(selector) {
         //* 'Неизвестно' => true
         //* undefined || 'Неизвестно' =>
 
-        if (name) {
+        if (name && type === 'human') {
             this.typeEl.innerText += `: ${name}`;
         }
     };

@@ -1,4 +1,5 @@
-/* global Timer */
+import Timer from './timerBrowserModule.js';
+
 const timer1 = new Timer(document.querySelector('.firstTimer'));
 
 new Timer(document.querySelector('.secondTimer'), true);

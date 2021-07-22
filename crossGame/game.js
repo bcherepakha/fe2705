@@ -103,6 +103,7 @@ const gamePrototype = {
         }
 
         this.board[cellIdx] = this.currentUser;
+        this.lastStep = cellIdx;
 
         const winLine = this.getUserWinLine();
         const standoff = !this.board.includes(EMPTY);
