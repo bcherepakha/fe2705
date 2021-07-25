@@ -23,6 +23,10 @@ const gamePrototype = {
         this.cellsCol.forEach(function (cell, idx) {
             //* this = game.cellsCol
             cell.addEventListener('click', function () {
+                if (self.canIClick && !self.canIClick(idx)) {
+                    return ;
+                }
+
                 self.step(idx); // ?
             }); //* LE = { this: cell }
         }); //* LE = { this: game.cellsCol }
@@ -194,7 +198,7 @@ const gamePrototype = {
 };
 
 // eslint-disable-next-line no-unused-vars
-function createGame(selector, onEndGame, onStep) {
+function createGame(selector, onEndGame, onStep, canIClick) {
     const game = {
         boardEl: document.querySelector(selector),
         board: new Array(9).fill(EMPTY),
@@ -203,6 +207,7 @@ function createGame(selector, onEndGame, onStep) {
         __proto__: gamePrototype
     };
 
+    game.canIClick = canIClick;
     game.cellsCol = Array.from(game.boardEl.querySelectorAll('.board__item'));
     game.addEventListeners();
     game.onEndGame = onEndGame;

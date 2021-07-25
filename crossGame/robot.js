@@ -1,4 +1,6 @@
-export function robot(board, user, lastStep) {
+export function robot(board, user, info) {
+    const { lastStep } = info;
+
     //* Правило 1. Если игрок может немедленно выиграть, он это делает.
     const myFutureWinLine = getFutureWinLine(board, user);
 
@@ -14,7 +16,8 @@ export function robot(board, user, lastStep) {
         return getEmptyPlaceIdx(enemyFutureWinLine);
     }
 
-    const step = board.filter(el => el !== '').length;
+    const steps = board.filter(el => el !== '');
+    const step = steps.length;
 
     if (user === 'x') {
         if (step === 0) {
@@ -29,6 +32,106 @@ export function robot(board, user, lastStep) {
 
         return getRandomEmptyCell(board);
     }
+
+    // играют нолики
+    if (step === 1 && board[4] === 'x') {
+        info.firstXinCenter = true;
+
+        return goInRandomCornerOrCell(board);
+    } else if (step === 1) {
+        info.firstXinCenter = false;
+        info.firstStep = lastStep;
+        info.firstStepInCorner = [0, 2, 6, 8].includes( info.firstStep );
+
+        return 4;
+    }
+
+    if (info.firstXinCenter) {
+        return goInRandomCornerOrCell(board);
+    }
+
+    if (info.firstStepInCorner && step === 3) {
+        return goOpositeCorner(board, info.firstStep);
+    }
+
+    if (step === 3 && [0, 2, 6, 8].includes(lastStep)) {
+        return goOpositeCorner(board, lastStep);
+    }
+
+    if (step === 3 && isOpositeSide(info.firstStep, lastStep)) {
+        return goInRandomCornerOrCell(board);
+    }
+
+    if (step === 3) {
+        return getNearestCorner(info.firstStep, lastStep);
+    }
+
+    return getRandomEmptyCell(board);
+}
+
+function getNearestCorner(step1, step2) {
+    switch (step2 + step1) {
+    case 4:
+        return 0;
+    case 6:
+        return 2;
+    case 10:
+        return 6;
+    case 12:
+        return 8;
+    default:
+        throw new Error(`${step1} and ${step2} not nearest sides`);
+    }
+}
+
+function isOpositeSide(step1, step2) {
+    const opositeSide = {
+        1: 7,
+        3: 5,
+        5: 3,
+        7: 1
+    }[step1];
+
+    return opositeSide === step2;
+}
+
+function goOpositeCorner(board, step) {
+    const oppositeCorner = {
+        0: 8,
+        2: 6,
+        6: 2,
+        8: 0
+    }[step];
+
+    if (board[oppositeCorner] === '') {
+        return oppositeCorner;
+    }
+
+    return getRandomEmptySideCell(board);
+}
+
+function goInRandomCornerOrCell(board) {
+    const cornerIdx = getRandomEmptyCorner(board);
+
+    if (typeof cornerIdx !== 'number') {
+        return getRandomEmptyCell(board);
+    } else {
+        return cornerIdx;
+    }
+}
+
+function getRandomEmptyCorner(board) {
+    const emptyCellIdxColl = [0, 2, 6, 8]
+        .filter(idx => board[idx] === '');
+
+    return emptyCellIdxColl[Math.floor(emptyCellIdxColl.length * Math.random())];
+}
+
+function getRandomEmptySideCell(board) {
+    const emptyCellIdxColl = [1, 3, 5, 7]
+        .filter(idx => board[idx] === '');
+
+    return emptyCellIdxColl[Math.floor(emptyCellIdxColl.length * Math.random())];
 }
 
 function getRandomEmptyCell(board) {
