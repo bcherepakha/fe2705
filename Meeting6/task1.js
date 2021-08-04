@@ -42,14 +42,9 @@ function getDiff(min = 0, max = 10, complexity = .4) {
     return Math.max(Math.round(complexity * (max - min)), 1);
 }
 
-function askUserNumber(min, max, submitHandler) {
-    showPrompt(
-        `Введите число от ${min} до ${max}`,
-        min,
-        (num) => {
-            return submitHandler(num === null ? null : parseInt(num, 10));
-        }
-    );
+function askUserNumber(min, max) {
+    return showPrompt(`Введите число от ${min} до ${max}`, min)
+        .then((num) => parseInt(num, 10));
 }
 
 function printResult() {
@@ -75,7 +70,7 @@ function resetResult() {
     saveToLocalStorage(0);
 }
 
-function showPrompt(text, defaultValue, submitHandler) {
+function showPrompt(text, defaultValue) {
     if (!showPrompt.rootEl) {
         showPrompt.rootEl = document.querySelector('.modal.prompt');
         showPrompt.textEl = showPrompt.rootEl.querySelector('.modal__text');
@@ -83,33 +78,55 @@ function showPrompt(text, defaultValue, submitHandler) {
         showPrompt.formEl = showPrompt.rootEl.querySelector('form');
     }
 
-    showPrompt.promtInput.value = defaultValue;
-    showPrompt.textEl.innerText = text;
-    showPrompt.rootEl.hidden = false;
-    showPrompt.promtInput.focus();
+    return new Promise((resolve, reject) => {
+        showPrompt.promtInput.value = defaultValue;
+        showPrompt.textEl.innerText = text;
+        showPrompt.rootEl.hidden = false;
+        showPrompt.promtInput.focus();
 
-    showPrompt.formEl.addEventListener('submit', e => {
-        e.preventDefault();
+        showPrompt.formEl.addEventListener('submit', e => {
+            e.preventDefault();
 
-        showPrompt.rootEl.hidden = true;
+            showPrompt.rootEl.hidden = true;
 
-        if (submitHandler) {
-            submitHandler(showPrompt.promtInput.value);
-        }
-    }, {
-        once: true
+            resolve(showPrompt.promtInput.value);
+        }, {
+            once: true
+        });
+
+        showPrompt.formEl.addEventListener('reset', e => {
+            e.preventDefault();
+
+            showPrompt.rootEl.hidden = true;
+
+            reject(null);
+        }, {
+            once: true
+        });
     });
+}
 
-    showPrompt.formEl.addEventListener('reset', e => {
-        e.preventDefault();
+function showAlert(text, result) {
+    if (!showAlert.rootEl) {
+        showAlert.rootEl = document.querySelector('.modal.alert');
+        showAlert.textEl = showAlert.rootEl.querySelector('.modal__text');
+        showAlert.btnEl = showAlert.rootEl.querySelector('.modal__actions button');
+    }
 
-        showPrompt.rootEl.hidden = true;
+    return new Promise(function (resolve) {
+        showAlert.textEl.innerText = text;
+        showAlert.rootEl.hidden = false;
+        showAlert.btnEl.focus();
 
-        if (submitHandler) {
-            submitHandler(null);
-        }
-    }, {
-        once: true
+        showAlert.btnEl.addEventListener('click', e => {
+            e.preventDefault();
+
+            showAlert.rootEl.hidden = true;
+
+            resolve(result);
+        }, {
+            once: true
+        });
     });
 }
 
@@ -155,22 +172,27 @@ function prepareGame() {
         const max = parseInt(maxInputEl.value, 10);
         const complexity = parseFloat(complexityEl.value);
 
-        askUserNumber(min, max, num => {
-            console.log( num );
-
-            if (num !== null) {
-                if (!inRange(num, min, max)) {
-                    return alert('Вы задумали не правильное число!');
+        askUserNumber(min, max)
+            .then(num => {
+                if (inRange(num, min, max)) {
+                    return num;
                 }
 
+                // return Promise.reject('Вы задумали не правильное число!');
+                throw new Error('Вы задумали не правильное число!');
+            })
+            .then(num => {
                 const computerNumber = getRandomNumber(min, max);
                 const result = checkUserNumber(num, computerNumber, getDiff(min, max, complexity));
 
-                alert(`Компьютер загадал: ${computerNumber}. Вы получили ${result} баллов`);
-
-                addResult(result);
-            }
-        });
+                return showAlert(`Компьютер загадал: ${computerNumber}. Вы получили ${result} баллов`, result);
+            })
+            .then(addResult)
+            .catch((err) => {
+                if (err && err.message) {
+                    return showAlert(err.message);
+                }
+            });
 
     });
 }

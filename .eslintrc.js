@@ -1,10 +1,11 @@
 module.exports = {
     'env': {
         'browser': true,
+        'es6': true
     },
-    'extends': 'eslint:recommended',
+    "extends": ['eslint:recommended', 'plugin:promise/recommended'],
     'parserOptions': {
-        'ecmaVersion': 6,
+        'ecmaVersion': 11,
         'sourceType': 'module'
     },
     'rules': {
