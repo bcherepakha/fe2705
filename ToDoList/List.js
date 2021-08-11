@@ -1,8 +1,9 @@
 export class List {
-    constructor() {
+    constructor( isCompleted ) {
         // this = {}
         // this.__proto__ = List.prototype
 
+        this.isCompleted = isCompleted;
         this.rootEl = document.querySelector('.todo-list');
         this.items = [];
 
@@ -23,6 +24,21 @@ export class List {
 
     addItem(item) {
         this.addItems([item]);
+    }
+
+    removeItem(removedItem) {
+        this.items = this.items.filter(item => item !== removedItem);
+        removedItem.remove();
+
+        this.render();
+    }
+
+    get size() {
+        return this.items.length;
+    }
+
+    get completed() {
+        return this.items.filter(this.isCompleted).length;
     }
 
     render() {

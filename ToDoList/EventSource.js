@@ -1,8 +1,9 @@
 export class EventSource {
-    static createEvent(type, target) {
+    static createEvent(type, target, data) {
         return {
             type,
             target,
+            data,
             createdAt: Date.now()
         };
     }
@@ -26,10 +27,10 @@ export class EventSource {
         }
     }
 
-    trigger(eventName) {
+    trigger(eventName, data) {
         if (this._handlers[eventName]) {
             this._handlers[eventName]
-                .forEach(fn => fn(EventSource.createEvent(eventName, this)));
+                .forEach(fn => fn(EventSource.createEvent(eventName, this, data)));
         }
     }
 }

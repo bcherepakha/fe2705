@@ -21,6 +21,31 @@ export class Store {
         }
     }
 
+    async changeTask(taskId, taskData) {
+        const tasks = await this.read();
+        const changedTaskIndex = tasks.findIndex(task => task.id === taskId);
+
+        if (changedTaskIndex === -1) {
+            throw new Error('task not found');
+        }
+
+        tasks[changedTaskIndex] = taskData;
+
+        await this.save(tasks);
+
+        return taskData;
+    }
+
+    removeTask(taskId) {
+        return this.read()
+            .then(tasks => {
+                const newTasks = tasks.filter(task => task.id !== taskId);
+
+                return newTasks;
+            })
+            .then((tasks) => this.save(tasks));
+    }
+
     addTask(taskData) {
         if (!taskData.id) {
             taskData.id = Date.now();

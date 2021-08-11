@@ -5,3 +5,7 @@
 * [Выразительный JavaScript: HTTP](https://habr.com/ru/post/245145/)
 * [Сетевые запросы](https://learn.javascript.ru/network)
 * [http протокол (видео)](https://www.youtube.com/watch?v=yUHlrabtEaU&feature=youtu.be)
+
+## Homework
+
+* [Разобраться с ToDoList и воплотить удаление элемента](../ToDoList/app.js)
