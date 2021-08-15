@@ -16,6 +16,12 @@ export class List {
         this.rootEl.innerText = '';
     }
 
+    filter(isHidden) {
+        this.items.forEach((item, idx, arr) => {
+            item.setVisibility( isHidden(item, idx, arr) );
+        });
+    }
+
     addItems(items) {
         this.items = [...this.items, ...items];
 

@@ -1,12 +1,20 @@
 export class AddTaskForm {
-    constructor( addTaskHandler ) {
+    constructor( addTaskHandler, changeInputHandler ) {
         this.formEl = document.querySelector('.header');
         this.inputEl = this.formEl.elements.task;
         this.completeEl = this.formEl.elements.complete;
 
         this.addTaskHandler = addTaskHandler;
+        this.changeInputHandler = changeInputHandler;
 
         this.formEl.addEventListener('submit', this.addTask.bind(this));
+        this.inputEl.addEventListener('input', this.onInput.bind(this));
+    }
+
+    onInput() {
+        if (this.changeInputHandler) {
+            this.changeInputHandler(this.inputEl.value);
+        }
     }
 
     addTask(e) {

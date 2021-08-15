@@ -116,6 +116,10 @@ export class Task extends EventSource {
         this.render();
     }
 
+    setVisibility(visibility) {
+        this.rootEl.hidden = !visibility;
+    }
+
     render() {
         this.editTextEl.value = this.data.text;
         this.toggleEl.checked = this.data.completed;
