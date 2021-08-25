@@ -20,7 +20,7 @@ export class EventSource {
             .filter(callback => callback !== eventCallback);
     }
 
-    trigger(eventName) {
+    trigger(eventName, data) {
         if (!this._events[eventName]) {
             return ;
         }
@@ -28,6 +28,7 @@ export class EventSource {
         this._events[eventName].forEach(eventCallback => {
             eventCallback({
                 target: this,
+                data,
                 type: eventName
             });
         });

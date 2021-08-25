@@ -23,7 +23,11 @@ export class Settings extends EventSource {
     }
 
     get complexity() {
-        return this.complexityControlItem.value;
+        return +this.complexityControlItem.value;
+    }
+
+    get showHint() {
+        return this.hintControlItem.checked;
     }
 
     createElements() {
@@ -31,10 +35,14 @@ export class Settings extends EventSource {
         const complexityControlContainer = document.createElement('label');
         const complexityControlItem = document.createElement('select');
         const complexityControlLabel = document.createElement('strong');
+        const hintControlContainer = document.createElement('label');
+        const hintControlItem = document.createElement('input');
+        const hintControlLabel = document.createElement('span');
         const startBtn = document.createElement('button');
+        const { defaultComplexity } = this.props;
 
         rootEl.className = 'game__settings';
-        complexityControlContainer.append(complexityControlLabel, complexityControlItem);
+        complexityControlContainer.append(complexityControlLabel, complexityControlItem, hintControlContainer);
         complexityControlLabel.innerText = 'Level:';
         complexityControlItem.append(
             ...this.props.complexity.map(
@@ -43,11 +51,20 @@ export class Settings extends EventSource {
 
                     optionElement.value = value;
                     optionElement.innerText = text;
+                    optionElement.selected = defaultComplexity === value;
 
                     return optionElement;
                 }
             )
         );
+        hintControlContainer.append(
+            hintControlItem,
+            hintControlLabel
+        );
+
+        hintControlItem.type = 'checkbox';
+        hintControlItem.checked = this.props.showHint;
+        hintControlLabel.innerText = 'Show hint';
 
         rootEl.append(complexityControlContainer, startBtn);
 
@@ -56,6 +73,7 @@ export class Settings extends EventSource {
 
         rootEl.addEventListener('submit', this.onSubmit.bind(this));
 
+        this.hintControlItem = hintControlItem;
         this.complexityControlItem = complexityControlItem;
         this.rootEl = rootEl;
     }
